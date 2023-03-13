@@ -1,0 +1,29 @@
+<h1>Comments</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Commenter</th>
+            <th>Approved</th>
+            <th>Comment</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+            {{#each comments}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{user.firstName}}</td>
+            <td><input data-id="{{id}}" type="checkbox" name="approveComment" {{#if approveComment}}checked{{/if}}/></td>
+            <td>{{body}}</td>
+            <td>{{generateTime date 'DD MMMM YYYY'}}</td>
+            <td>
+                <form action="/admin/comments/{{id}}?_method=DELETE" method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+       </tr>
+            {{/each}}
+    </tbody>
+</table>

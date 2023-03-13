@@ -1,0 +1,65 @@
+<div class="card card-login mx-auto mt-5">
+    <div class="card-header">New Listing</div>
+
+    <div class="card-body">
+        <form action="/listings/add-listing" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="listingTitle">Title</label>
+                <input name="listingTitle" class="form-control" id="listingTitle" type="text" aria-describedby="emailHelp" placeholder="Enter Title">
+            </div>
+            <div class="form-group">
+  <label for="description">Description</label>
+  <textarea name="description" class="form-control" placeholder="Leave a short description here" id="description" style="height: 100px"></textarea>
+</div>
+<div class="form-group">
+  <label for="finPhoto" class="form-label">Photo</label>
+  <input class="form-control" type="file" id="finPhoto" name="file">
+</div>
+
+            <div class="form-group">
+                <label for="listingFinType">Fin Type</label>
+                <div class="form-check">
+                    <label class="form-check-label form-check-inline" for="fcs">
+                        <input class="form-check-input form-check-inline" type="radio" id="fcs" name="finType" value="fcs"> FCS</label>
+                    <label class="form-check-label form-check-inline" for="fcs2">
+                        <input class="form-check-input form-check-inline" type="radio" id="fcs-2" name="finType" value="fcs2"> FCS 2</label>
+                    <label class="form-check-label form-check-inline" for="futures">
+                        <input class="form-check-input form-check-inline" type="radio" id="futures" name="finType" value="futures"> Futures</label>
+                    <label class="form-check-label form-check-inline" for="other">
+                        <input class="form-check-input form-check-inline" type="radio" id="other" name="finType" value="other"> Other</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="listingFinType">Fin Size</label>
+                <div class="form-check">
+                    <label class="form-check-label form-check-inline" for="finExtraSmall">
+                        <input class="form-check-input form-check-inline" type="radio" id="finExtraSmall" name="finSize" value="extra-small"> Extra Small</label>
+                    <label class="form-check-label form-check-inline" for="finSmall">
+                        <input class="form-check-input form-check-inline" type="radio" id="finSmall" name="finSize" value="small"> Small</label>
+                    <label class="form-check-label form-check-inline" for="finMedium">
+                        <input class="form-check-input form-check-inline" type="radio" id="finMedium" name="finSize" value="medium"> Medium</label>
+                    <label class="form-check-label form-check-inline" for="finLarge">
+                        <input class="form-check-input form-check-inline" type="radio" id="finLarge" name="finSize" value="large"> Large</label>
+                    <label class="form-check-label form-check-inline" for="finExtraLarge">
+                        <input class="form-check-input form-check-inline" type="radio" id="finExtraLarge" name="finSize" value="extra-large"> Extra Large</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="listingFinType">Setup</label>
+                <div class="form-check">
+                    <label class="form-check-label form-check-inline" for="singleFin">
+                        <input class="form-check-input form-check-inline" type="radio" id="singleFin" name="finSetup" value="single-fin"> Single Fin</label>
+                    <label class="form-check-label form-check-inline" for="twinFin">
+                        <input class="form-check-input form-check-inline" type="radio" id="twinFin" name="finSetup" value="twin-fin"> Twin Fin</label>
+                    <label class="form-check-label form-check-inline" for="twoPlusOne">
+                        <input class="form-check-input form-check-inline" type="radio" id="twoPlusOne" name="finSetup" value="two-plus-one"> 2 + 1</label>
+                    <label class="form-check-label form-check-inline" for="thruster">
+                        <input class="form-check-input form-check-inline" type="radio" id="thruster" name="finSetup" value="thruster"> Thruster</label>
+                    <label class="form-check-label form-check-inline" for="quadFin">
+                        <input class="form-check-input form-check-inline" type="radio" id="quadFin" name="finSetup" value="quad-fin"> Quad Fin</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit Listing</button>
+        </form>
+    </div>
+</div>

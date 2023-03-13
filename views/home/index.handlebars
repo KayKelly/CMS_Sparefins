@@ -1,0 +1,57 @@
+      <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+          <h1 class="my-4">Home</h1>
+
+          {{!-- {{#each posts}}
+
+          <!-- Blog Post -->
+          <div class="card mb-4">
+            <img class="img-fluid" {{#if file}} src="/uploads/{{file}}" {{else}}src="https://via.placeholder.com/300x50"{{/if}} alt="Card image cap">
+            <div class="card-body">
+              <h2 class="card-title">{{title}}</h2>
+              <p class="card-text">{{{body}}}</p>
+              <a href="post/{{slug}}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+              Posted on {{generateTime date 'DD MMM YYYY'}}, by
+              <a href="#">{{user.firstName}}</a>
+            </div>
+          </div>
+          {{/each}} --}}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {{#each posts}}
+  <div class="col-sm-6" style="margin-bottom:10px;">
+    <div class="card h-100">
+      <img {{#if file}} src="https://sparefins.s3.ap-southeast-2.amazonaws.com/{{file}}" {{else}}src="https://via.placeholder.com/100x100"{{/if}}class="card-img-top" style="object-fit:scale-down;width:100%;height:30vh;">
+      <div class="card-body">
+        <h5 class="card-title">{{title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">By: <a href="profile/{{user.id}}">{{user.firstName}}</a></h6>
+        <p class="card-text">{{{body}}}</p>
+        <p><small>{{type}}, {{setup}}, {{size}}</small></p>
+
+                
+
+      </div>
+      <div class="card-footer">
+        <small><a href="post/{{slug}}" class="btn btn-dark">Read More &rarr;</a></small>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+          
+
+          <!-- Pagination -->
+          <ul class="pagination justify-content-center mb-4">
+            {{#paginate current=current pages=pages}}{{/paginate}}
+          </ul>
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        {{> home/sidebar}}
+      </div>
+      <!-- /.row -->

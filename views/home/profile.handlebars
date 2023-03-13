@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-lg-4">
+    <div class="card mb-4">
+      <div class="card-body text-center">
+        <img src="https://ui-avatars.com/api/?name={{user.firstName}}+{{user.lastName}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+        <h5 class="my-3">{{user.firstName}} {{user.lastName}}</h5>
+        <div class="d-flex justify-content-center mb-2">
+          <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">Info</h2>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Email:</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{user.email}}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Location:</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">Raglan, New Zealand</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4 mb-md-0">
+      <div class="card-body">
+        <h2 class="card-title">Recent Posts</h2>
+        <hr>
+        <div class="row">
+          {{#each posts}}
+            <div class="col-md-4">
+              <h5 class="text-muted mb-0">{{this.title}}</h5>
+              <p class="text-muted mb-0"><img src="/uploads/{{this.file}}" style="width:250px; height:100%;"</p>
+              <p class="text-muted mb-0">{{{this.body}}}</p>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

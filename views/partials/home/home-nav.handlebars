@@ -1,0 +1,53 @@
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">SPAREFINS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            {{#if user.admin}}
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">Admin</a>
+            </li>
+            {{/if}}
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            {{#unless user}}
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Register</a>
+            </li>
+            {{/unless}}
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            </ul>
+            {{#if user}}
+           <div class="btn-group">
+              <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-user"></i>
+                <span class="visually-hidden">{{user.firstName}}</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/edit-profile/{{user.id}}">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/logout">
+                <i class="fa fa-sign-out"></i> Log Out</a></li>
+              </ul>
+            </div>
+            {{/if}}
+        <a class="btn btn-primary" href="/listings/add-listing" role="button">
+          <i class="fa fa-plus"></i>
+          Add Listing
+        </a>
+      </div>
+    </nav>

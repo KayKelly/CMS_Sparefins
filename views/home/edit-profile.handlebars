@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-4">
+    <div class="card mb-4">
+      <div class="card-body text-center">
+        <img src="https://ui-avatars.com/api/?name={{user.firstName}}+{{user.lastName}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+        <h5 class="my-3">{{user.firstName}} {{user.lastName}}</h5>
+        <div class="d-flex justify-content-center mb-2">
+          <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">Edit Profile</h2>
+        <hr>
+    <form class="form-control" action="home/edit_profile/{{user.id}}?_method=PUT" method="post" enctype="multipart/form-data">
+        <label for="firstName">First Name:</label>
+        <input name="firstName" type="text" class="form-control" id="firstName" value="{{user.firstName}}">
+    <div class="form-group">
+        <label for="file">Last Name</label>
+          <input name="title" type="text" class="form-control" id="lastName" value="{{user.lastName}}">
+    </div>
+    <div class="form-group">
+        <label for="file">Location</label>
+          <input name="title" type="text" class="form-control" id="lastName" value="{{user.location}}">
+    </div>
+    </div>
+    </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4 mb-md-0">
+      <div class="card-body">
+        <h2 class="card-title">Recent Posts</h2>
+        <hr>
+        <div class="row">
+          {{#each posts}}
+            <div class="col-md-4">
+              <h5 class="text-muted mb-0">{{this.title}}</h5>
+              <p class="text-muted mb-0"><img src="/uploads/{{this.file}}" style="width:250px; height:100%;"</p>
+              <p class="text-muted mb-0">{{{this.body}}}</p>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

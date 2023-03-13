@@ -1,0 +1,27 @@
+<h1>All Posts</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>Allow Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each posts}}
+        <tr>
+            <td>{{title}}</td>
+            <td><img src='/uploads/{{file}}' height="50px"></td>
+            <td>{{generateTime date 'DD MMMM YYYY'}}</td>
+            <td>{{status}}</td>
+            <td>{{category.name}}</td>
+            <td>{{allowComments}}</td>
+            <td><a href="/post/{{slug}}">View Post</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

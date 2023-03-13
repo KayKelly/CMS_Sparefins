@@ -1,0 +1,38 @@
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+          <!-- Title -->
+          <h1 class="mt-4">{{post.title}}</h1>
+
+          <!-- Author -->
+          <p class="lead">
+            by
+            <a href="#">{{post.user.firstName}}</a>
+          </p>
+          
+          <!-- Date/Time -->
+          <p>Posted on {{generateTime date 'DD MMM YYYY'}}</p>
+
+        <hr>
+
+          <!-- Preview Image -->
+          <img class="img-fluid rounded" style="object-fit:scale-down;width:100%;height:30vh;" {{#if post.file}} src="https://sparefins.s3.amazonaws.com/{{post.file}}" {{else}}src="https://via.placeholder.com/300x50"{{/if}} alt="">
+
+        <hr>
+
+          <!-- Post Content -->
+          <p class="lead">{{{post.body}}}</p>
+        </div>
+        <!-- Sidebar Widgets Column -->
+        {{> home/sidebar}}
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
