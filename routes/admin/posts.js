@@ -126,14 +126,8 @@ router.put('/edit/:id', (req, res)=>{
 
 router.delete('/:id', (req, res)=>{
     Post.findOne({_id: req.params.id})
-        .populate('comments')
         .then(post=>{
             fs.unlink(uploadDir + post.file, (err)=>{
-                if(!post.comments.length < 1){
-                    post.comments.forEach(comment=>{
-                        comment.remove();
-                    });
-                };
                 post.remove().then(postRemoved=>{
                     res.redirect('/admin/posts/my-posts');
                     req.flash('delete_message', `Post was deleted successfully`);
