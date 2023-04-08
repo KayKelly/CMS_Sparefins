@@ -19,7 +19,6 @@
             <td>{{generateTime date 'DD MMMM YYYY'}}</td>
             <td>{{status}}</td>
             <td>{{category.name}}</td>
-            <td>{{allowComments}}</td>
             <td><a href="/post/{{id}}">View Post</a></td>
             <td><a href="/admin/posts/edit/{{_id}}" class="btn btn-info">Edit</a></td>
             <td><form action="/admin/posts/{{_id}}?_method=DELETE" method="post">

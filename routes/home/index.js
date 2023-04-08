@@ -3,6 +3,7 @@ const router = express.Router();
 const Post = require('../../models/Post');
 const Category = require('../../models/Category');
 const User = require('../../models/User');
+const Message = require('../../models/Message');
 const bcryptjs = require('bcryptjs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -42,6 +43,67 @@ router.get('/post/:slug', (req, res)=>{
 router.get('/about', (req, res)=>{
     res.render('home/about');
 });
+router.get('/send-message/:slug', (req, res) => {
+    const { slug } = req.params;
+    console.log(slug);
+    Post.findOne({ slug }, (err, post) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send('Internal Server Error');
+        }
+    res.render('home/send-message', { slug: post.slug });
+    });
+  });
+
+router.post('/send-message/:slug', (req, res)=>{
+    const { slug } = req.params;
+    const { messageBody } = req.body;
+    const senderName = req.user.firstName;
+
+    Post.findOne({ slug }, (err, post) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        console.log(post);
+    const message = new Message({
+        post: post,
+        senderName: senderName,
+        messageBody: messageBody
+    });
+
+    message.save((err, savedMessage) =>{
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Internal Server Error');
+        }
+
+    console.log(`Message saved: ${savedMessage}`);
+    res.redirect(`/post/${post.slug}`);
+    })
+    })
+})
+
+router.get('/view-messages/:id', (req, res) => {
+    User.findOne({_id: req.params.id})
+        .then(foundUser => {
+            if (!foundUser) {
+                req.flash('error', 'User not found');
+                return res.redirect('/');
+            }
+            Post.find({user: req.params.id})
+                .then(posts =>{
+                    res.render('home/view-messages', { user: foundUser, posts: posts });
+                })
+        })
+        .catch(error => {
+            console.error(error);
+            req.flash('error', 'An error occurred while trying to retrieve the user');
+            res.redirect('/');
+        });
+});
+
 router.get('/password-reset', (req, res)=>{
     res.render('home/password-reset');
 });

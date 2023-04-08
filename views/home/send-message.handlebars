@@ -1,0 +1,12 @@
+<div class="card card-login mx-auto mt-5">
+    <div class="card-header">Send a message about <strong>{{ slug }}</strong></div>
+    <div class="card-body">
+        <form action="/send-message/{{slug}}" method="post">
+            <div class="form-group">
+                <label for="sendMessage">Message</label>
+                <textarea name="messageBody" class="form-control" id="sendMessage" type="text" aria-describedby="messageBody"></textarea>
+            </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send</button>
+        </form>
+    </div>

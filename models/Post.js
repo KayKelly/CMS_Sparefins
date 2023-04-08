@@ -35,7 +35,15 @@ const PostSchema = new Schema({
     },
     slug: {
         type: String
-    }
+    },
+    messages: [{
+        user: String,
+        message: String,
+        date: {
+            type: Date,
+            default: Date.now()
+        }
+    }]
 });
 
 PostSchema.plugin(URLSlugs('title', {field: 'slug'}));
