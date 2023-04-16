@@ -32,7 +32,7 @@ app.engine('handlebars', exphbs.engine({handlebars: allowInsecurePrototypeAccess
 app.set('view engine', 'handlebars');
 
 app.use(session({
-    secret: 'kaykelly123',
+    secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false
 }))
