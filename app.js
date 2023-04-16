@@ -31,6 +31,12 @@ const { select, generateTime, paginate } = require('./helpers/handlebars-helpers
 app.engine('handlebars', exphbs.engine({handlebars: allowInsecurePrototypeAccess(Handlebars), defaultLayout: 'home', helpers: { select: select, generateTime: generateTime, paginate: paginate }}));
 app.set('view engine', 'handlebars');
 
+app.use(session({
+    secret: 'kaykelly123',
+    resave: false,
+    saveUninitialized: false
+}))
+
 // Express File Upload
 app.use(upload());
 
@@ -41,11 +47,6 @@ app.use(bodyParser.json());
 // Method Override
 app.use(methodOverride('_method'));
 
-app.use(session({
-    secret: 'kaykelly123',
-    resave: true,
-    saveUninitialized: false
-}))
 
 // Viewer for success/error messages
 app.use(flash());
@@ -71,6 +72,7 @@ const posts = require('./routes/admin/posts');
 const categories = require('./routes/admin/categories');
 const comments = require('./routes/admin/comments');
 const fins = require('./routes/home/fins');
+const messages = require('./routes/home/messages');
 
 // Use routes
 app.use('/', home);
@@ -79,6 +81,7 @@ app.use('/admin/posts', posts);
 app.use('/admin/categories', categories);
 app.use('/admin/comments', comments);
 app.use('/listings', fins);
+app.use('/messages', messages);
 
 // Use variable enovirement port or static port 4500
 const port = process.env.PORT || 4500;

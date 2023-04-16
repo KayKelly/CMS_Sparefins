@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <h1>Messages</h1>
+    {{#if messages}}
+    {{#each messages}}
+    <div class="card mt-2">
+        <div class="card-header">From: <strong><a href="/profile/{{sender._id}}">{{sender.firstName}}</a></strong> about: <strong>{{originalPost.title}}</strong> </div>
+        <div class="card-body">
+        {{messageBody}}
+        </div>
+        <div class="card-footer p-0">
+<form action="/messages/delete-message/{{_id}}" method="POST">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+  <div class="card-footer p-0">
+    <button class="btn btn-success"><strong>Reply</strong> <i class="fa fa-reply"></i></button>
+    <button class="btn btn-danger" type="submit">Delete</button>
+  </div>
+</form>
+</div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="card mt-2">
+        <div class="card-header">
+    You don't have any messages
+    </div>
+    </div>
+    {{/if}}
+</div>

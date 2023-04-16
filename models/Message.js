@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
-  post: {
+  sender: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post'
+    ref: 'users',
+    required: true
   },
-  senderName: {
-    type: String,
+  recipient: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
     required: true
   },
   messageBody: {
@@ -16,6 +18,14 @@ const messageSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  originalPost: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  },
+  read: {
+    type: Boolean,
+    default: false
   }
 });
 

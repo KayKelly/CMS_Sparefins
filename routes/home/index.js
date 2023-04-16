@@ -3,10 +3,19 @@ const router = express.Router();
 const Post = require('../../models/Post');
 const Category = require('../../models/Category');
 const User = require('../../models/User');
-const Message = require('../../models/Message');
 const bcryptjs = require('bcryptjs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const Message = require('../../models/Message');
+
+// Middleware function to retrieve the number of unread messages for the current user
+router.use(async (req, res, next) => {
+    if (req.user) { // Check if user is authenticated
+      const unreadCount = await Message.count({ recipient: req.user._id, read: false });
+      res.locals.unreadCount = unreadCount;
+    }
+    next(); // Call next middleware
+  });
 
 router.all('/*', (req, res, next)=>{
     req.app.locals.layout = 'home';
@@ -31,6 +40,7 @@ router.get('/', (req, res)=>{
         });
     });
 });
+
 router.get('/post/:slug', (req, res)=>{
     Post.findOne({slug: req.params.slug}).populate({path: 'user', model: 'users'})
     .then(post=>{
@@ -42,66 +52,6 @@ router.get('/post/:slug', (req, res)=>{
 });
 router.get('/about', (req, res)=>{
     res.render('home/about');
-});
-router.get('/send-message/:slug', (req, res) => {
-    const { slug } = req.params;
-    console.log(slug);
-    Post.findOne({ slug }, (err, post) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send('Internal Server Error');
-        }
-    res.render('home/send-message', { slug: post.slug });
-    });
-  });
-
-router.post('/send-message/:slug', (req, res)=>{
-    const { slug } = req.params;
-    const { messageBody } = req.body;
-    const senderName = req.user.firstName;
-
-    Post.findOne({ slug }, (err, post) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Internal Server Error');
-        }
-
-        console.log(post);
-    const message = new Message({
-        post: post,
-        senderName: senderName,
-        messageBody: messageBody
-    });
-
-    message.save((err, savedMessage) =>{
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Internal Server Error');
-        }
-
-    console.log(`Message saved: ${savedMessage}`);
-    res.redirect(`/post/${post.slug}`);
-    })
-    })
-})
-
-router.get('/view-messages/:id', (req, res) => {
-    User.findOne({_id: req.params.id})
-        .then(foundUser => {
-            if (!foundUser) {
-                req.flash('error', 'User not found');
-                return res.redirect('/');
-            }
-            Post.find({user: req.params.id})
-                .then(posts =>{
-                    res.render('home/view-messages', { user: foundUser, posts: posts });
-                })
-        })
-        .catch(error => {
-            console.error(error);
-            req.flash('error', 'An error occurred while trying to retrieve the user');
-            res.redirect('/');
-        });
 });
 
 router.get('/password-reset', (req, res)=>{
@@ -177,14 +127,25 @@ passport.deserializeUser((id, done) =>{
     });
 });
 
-router.post('/login', passport.authenticate('local', {
-    failureRedirect: '/login',
-    failureFlash: true
-  }), (req, res) => {
-    const redirectTo = req.session.returnTo || '/';
-    console.log('redirectTo:', redirectTo);
-    delete req.session.returnTo;
-    res.redirect(redirectTo);
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+      successRedirect: req.session.returnTo || '/',
+      failureRedirect: 'home/login',
+      failureFlash: true
+    })(req, res, next);
+  });
+  
+  
+  router.get('/listings/add-listing', (req, res) => {
+    console.log('add-listing middleware called');
+    if (!req.user) {
+      req.session.returnTo = req.originalUrl;
+      console.log('returnTo set to:', req.session.returnTo);
+      req.flash('error', 'You have to be logged in to add a listing');
+      return res.redirect('/login');
+    } else {
+        res.render('home/listings/add-listing');
+    }
   });
   
 router.get('/logout', (req, res, next)=>{

@@ -1,0 +1,14 @@
+body {
+    height: 100% !important;
+    margin-bottom: -50px !important;
+}
+
+.push {
+height:120px;
+}
+
+@media only screen and (max-width: 800px) {
+    .push, .footr {
+        display: none;
+    }    
+}

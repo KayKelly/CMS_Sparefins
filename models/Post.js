@@ -37,12 +37,8 @@ const PostSchema = new Schema({
         type: String
     },
     messages: [{
-        user: String,
-        message: String,
-        date: {
-            type: Date,
-            default: Date.now()
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Message'
     }]
 });
 

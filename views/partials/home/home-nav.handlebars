@@ -36,15 +36,17 @@
               <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user"></i>
                 <span class="visually-hidden">{{user.firstName}}</span>
+                {{#if unreadCount}}<span class="badge badge-primary"> {{unreadCount}}</span>{{/if}}
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/edit-profile/{{user.id}}">Profile</a></li>
-                <li><a class="dropdown-item" href="/view-messages/{{user.id}}">Messages</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="/logout">
-                <i class="fa fa-sign-out"></i> Log Out</a></li>
-              </ul>
-            </div>
+    <li><a class="dropdown-item" href="/edit-profile/{{user.id}}">Profile</a></li>
+    <li><a class="dropdown-item" href="/messages/{{user.id}}">
+        Messages {{#if unreadCount}}<span class="badge badge-primary"> {{unreadCount}}</span>{{/if}}
+    </a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="/logout"><i class="fa fa-sign-out"></i> Log Out</a></li>
+</ul>
+
             {{/if}}
         <a class="btn btn-primary" href="/listings/add-listing" role="button">
           <i class="fa fa-plus"></i>

@@ -46,7 +46,7 @@
           {{#each posts}}
             <div class="col-md-4">
               <h5 class="text-muted mb-0">{{this.title}}</h5>
-              <p class="text-muted mb-0"><img src="/uploads/{{this.file}}" style="width:250px; height:100%;"</p>
+              <p class="text-muted mb-0"><img src="https://sparefins.s3.amazonaws.com/{{this.file}}" style="width:250px; height:100%;"></p>
               <p class="text-muted mb-0">{{{this.body}}}</p>
             </div>
           {{/each}}
