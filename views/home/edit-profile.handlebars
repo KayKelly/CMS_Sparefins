@@ -35,17 +35,30 @@
   <div class="col-md-12">
     <div class="card mb-4 mb-md-0">
       <div class="card-body">
-        <h2 class="card-title">Recent Posts</h2>
+        <h2 class="card-title">Your Posts</h2>
         <hr>
-        <div class="row">
-          {{#each posts}}
-            <div class="col-md-4">
-              <h5 class="text-muted mb-0">{{this.title}}</h5>
-              <p class="text-muted mb-0"><img src="https://sparefins.s3.amazonaws.com/{{file}}" style="width:250px; height:100%;"></p>
-              <p class="text-muted mb-0">{{{this.body}}}</p>
-            </div>
-          {{/each}}
-        </div>
+          <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each posts}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{generateTime date 'DD MMMM YYYY'}}</td>
+            <td>{{category.name}}</td>
+            <td><a href="/post/{{id}}">View Post</a></td>
+            <td><a href="/admin/posts/edit/{{_id}}" class="btn btn-info">Edit</a></td>
+            <td><form action="/admin/posts/{{_id}}?_method=DELETE" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button></form></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
       </div>
     </div>
   </div>
