@@ -79,4 +79,14 @@ router.post('/add-listing', (req, res)=>{
     }
 });
 
+router.delete('/:id', (req, res)=>{
+    Post.findOne({_id: req.params.id})
+        .then(post=>{
+                post.remove().then(postRemoved=>{
+                    req.flash('delete_message', `Post was deleted successfully`);
+                    res.redirect(req.get('referer'));
+                });
+            });
+        });
+
 module.exports = router;

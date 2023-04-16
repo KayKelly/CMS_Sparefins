@@ -1,41 +1,56 @@
    <div class="col-md-4">
 
-          <!-- Search Widget -->
+          <!-- Filters Widget -->
           <div class="card my-4">
-            <h5 class="card-header">Search</h5>
-            <div class="card-body">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Categories Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Categories</h5>
+            <h5 class="card-header">Filters</h5>
             <div class="card-body">
               <div class="row">
-                {{#each categories}}
                 <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">{{name}}</a>
-                    </li>
-                  </ul>
+                    <div class="form-group">
+                <strong><label for="listingFinType">Fin Type</label></strong>
+                <div class="form-check">
+                    <label class="form-check-label form-check-inline" for="fcs">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="fcs" name="finType" value="fcs"> FCS</label>
+                    <label class="form-check-label form-check-inline" for="fcs-2">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="fcs-2" name="finType" value="fcs2"> FCS 2</label>
+                    <label class="form-check-label form-check-inline" for="futures">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="futures" name="finType" value="futures"> Futures</label>
+                    <label class="form-check-label form-check-inline" for="other">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="other" name="finType" value="other"> Other</label>
                 </div>
-                {{/each}}
-              </div>
             </div>
-          </div>
-
-          <!-- Side Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Side Widget</h5>
-            <div class="card-body">
-              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            <div class="form-group">
+                <strong><label for="listingFinType">Fin Size</label></strong>
+                <div class="form-check">
+                    <label class="form-check-label form-check-inline" for="finExtraSmall">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="finExtraSmall" name="finSize" value="extra-small"> Extra Small</label>
+                    <label class="form-check-label form-check-inline" for="finSmall">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="finSmall" name="finSize" value="small"> Small</label>
+                    <label class="form-check-label form-check-inline" for="finMedium">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="finMedium" name="finSize" value="medium"> Medium</label>
+                    <label class="form-check-label form-check-inline" for="finLarge">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="finLarge" name="finSize" value="large"> Large</label>
+                    <label class="form-check-label form-check-inline" for="finExtraLarge">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="finExtraLarge" name="finSize" value="extra-large"> Extra Large</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <strong><label for="listingFinType">Setup</label></strong>
+                <div class="form-check">
+                    <label class="form-check-label form-check-inline" for="singleFin">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="singleFin" name="finSetup" value="single-fin"> Single Fin</label>
+                    <label class="form-check-label form-check-inline" for="twinFin">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="twinFin" name="finSetup" value="twin-fin"> Twin Fin</label>
+                    <label class="form-check-label form-check-inline" for="twoPlusOne">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="twoPlusOne" name="finSetup" value="two-plus-one"> 2 + 1</label>
+                    <label class="form-check-label form-check-inline" for="thruster">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="thruster" name="finSetup" value="thruster"> Thruster</label>
+                    <label class="form-check-label form-check-inline" for="quadFin">
+                        <input class="form-check-input form-check-inline" type="checkbox" id="quadFin" name="finSetup" value="quad-fin"> Quad Fin</label>
+                </div>
+            </div>
+                </div>
+              </div>
             </div>
           </div>
 

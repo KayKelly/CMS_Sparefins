@@ -35,6 +35,7 @@
   <div class="col-md-12">
     <div class="card mb-4 mb-md-0">
       <div class="card-body">
+      {{#if posts}}
         <h2 class="card-title">Your Posts</h2>
         <hr>
           <table class="table table-bordered">
@@ -53,12 +54,15 @@
             <td>{{category.name}}</td>
             <td><a href="/post/{{id}}">View Post</a></td>
             <td><a href="/admin/posts/edit/{{_id}}" class="btn btn-info">Edit</a></td>
-            <td><form action="/admin/posts/{{_id}}?_method=DELETE" method="post">
+            <td><form action="/listings/{{_id}}?_method=DELETE" method="post">
             <button type="submit" class="btn btn-danger">Delete</button></form></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+{{else}}
+<h2 class="card-title">You don't have any listings</h2>
+{{/if}}
       </div>
     </div>
   </div>
