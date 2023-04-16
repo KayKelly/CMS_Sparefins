@@ -15,14 +15,14 @@
           </div>
           <div class="card-footer">
             <small><a href="post/{{slug}}" class="btn btn-dark">Read More &rarr;</a></small>
-            <small style="float:right;"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sendMessage" onclick="setModalTitle('{{title}}')"><i class="fa fa-comment"></i></button></small>
+            <small style="float:right;"><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sendMessage" onclick="setModalTitle('{{title}}', '{{user.firstName}}')"><i class="fa fa-comment"></i></button></small>
             <!-- Modal -->
             <div class="modal fade" id="sendMessage" tabindex="-1" aria-labelledby="sendMessage" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <form id="messageForm" action="/messages/send-message/{{user._id}}/{{slug}}" method="POST">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="sendMessageTitle">Reply to {{title}}</h1>
+                      <h2 class="modal-title fs-5" id="sendMessageTitle">Send a message about {{title}}</h2>
                     </div>
                     <div class="modal-body">
                       <textarea id="message" name="message" class="form-control" placeholder="Your message.."></textarea>
@@ -43,9 +43,9 @@
 
 <!-- Add the correct title to the "reply to listing" modal -->
 <script>
-  function setModalTitle(title) {
+  function setModalTitle(title, firstName) {
     const modalTitle = document.querySelector('#sendMessage .modal-title');
-    modalTitle.textContent = `Reply to  ${title}`;
+    modalTitle.textContent = `Message ${firstName} about ${title}`;
   }
 </script>
           
