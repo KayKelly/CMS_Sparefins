@@ -26,11 +26,22 @@
   </head>
 
   <body>
+    <div class="wrapper">
+
+    <!-- Hero -->
+    <header class="p-4 rounded-3 bg-light">
+      <div class="container-fluid">
+        <h1 class="display-5 fw-bold">Sparefins</h1>
+        <p class="col-md-8 lead">
+          Welcome to Sparefins, the marketplace for your fins!
+        </p>
+      </div>
+    </header>
 
     {{> home/home-nav}}
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container-fluid">
 
       {{#if errors}}
         {{#each errors}}
@@ -41,10 +52,11 @@
       {{/if}}
         {{> home/form-msgs}}
         {{{body}}}
-    </div>
     <!-- /.container -->
 
+    </div>
 {{> home/footer}}
+</div>
 
 
        <!-- Bootstrap core JavaScript-->
