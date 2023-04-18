@@ -4,8 +4,17 @@ body {
     /* margin-bottom: 50px !important; */
 }
 
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.wrapper {
+    padding-bottom: 4rem;
+}
+
 header {
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(/images/sparefinsHero.jpg);
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)), url(/images/sparefinsHero.jpg);
     background-size: cover;
     background-position: center;
     color: white;
@@ -14,15 +23,22 @@ header {
 
 
 .footer {
-    position: static;
+    position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
-    height: 50px; /* adjust the height as needed */
+    height: 4rem; /* adjust the height as needed */
     background-color: #212529;
-    padding: 10px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
+
+.socials {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
   
 @media only screen and (max-width: 800px) {
     .push, .footr {
