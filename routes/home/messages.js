@@ -9,6 +9,7 @@ router.get('/:id', (req, res) => {
       .populate('sender', 'firstName')
       .populate('recipient', 'firstName')
       .populate('originalPost', 'title')
+      .populate('originalPost', 'slug')
       .sort({ createdAt: 'desc' })
       .then(messages => {
         messages.forEach(message =>{

@@ -8,13 +8,32 @@
         {{messageBody}}
         </div>
         <div class="card-footer p-0">
-<form action="/messages/delete-message/{{_id}}" method="POST">
-  <input type="hidden" name="_csrf" value="{{csrfToken}}">
-  <div class="card-footer p-0">
-    <button class="btn btn-success"><strong>Reply</strong> <i class="fa fa-reply"></i></button>
+          <div class="d-flex">
+<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sendMessage"><strong>Reply</strong> <i class="fa fa-reply"></i></button>
+{{!-- modal --}}
+<div class="modal fade" id="sendMessage" tabindex="-1" aria-labelledby="sendMessage" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form id="messageForm" action="/messages/send-message/{{sender._id}}/{{originalPost.slug}}" method="POST">
+                    <div class="modal-header">
+                      <h2 class="modal-title fs-5" id="sendMessageTitle">Reply to {{sender.firstName}}</h2>
+                    </div>
+                    <div class="modal-body">
+                      <textarea id="message" name="message" class="form-control" placeholder="Your message.." data-bs-audo-focus="false"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+  <form action="/messages/delete-message/{{_id}}" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <button class="btn btn-danger" type="submit">Delete</button>
+  </form>
   </div>
-</form>
 </div>
     </div>
     {{/each}}

@@ -41,6 +41,22 @@ router.get('/', (req, res)=>{
     });
 });
 
+router.post('/filter', (req, res) => {
+    const selectedSizes = req.body.size; // An array of selected sizes
+    // Find all posts with size in the selectedSizes array
+    Post.find({ size: { $in: selectedSizes } })
+      .then(posts => {
+        console.log(selectedSizes);
+        res.render('home/index', { posts }); // Render the home page with the filtered posts
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send('Server error');
+      });
+  });
+  
+  
+
 router.get('/post/:slug', (req, res)=>{
     Post.findOne({slug: req.params.slug}).populate({path: 'user', model: 'users'})
     .then(post=>{

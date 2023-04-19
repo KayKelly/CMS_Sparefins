@@ -1,4 +1,4 @@
-   <div class="col-md-2">
+   <div class="col-md-3">
 
           <!-- Filters Widget -->
           <div class="card my-4">
@@ -6,7 +6,8 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-6">
-                    <div class="form-group">
+                    <form action="/filter" method="post">
+                    <div class="form-group" id="listingFinType">
                 <strong><label for="listingFinType">Fin Type</label></strong>
                 <div class="form-check">
                     <label class="form-check-label form-check-inline" for="fcs">
@@ -49,9 +50,10 @@
                         <input class="form-check-input form-check-inline" type="checkbox" id="quadFin" name="finSetup" value="quad-fin"> Quad Fin</label>
                 </div>
             </div>
+            <button type="submit" class="btn btn-dark">Apply Filters</button>
+            </form>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
