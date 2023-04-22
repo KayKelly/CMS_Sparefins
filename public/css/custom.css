@@ -40,8 +40,8 @@ header {
     gap: 2em;
 }
   
-@media only screen and (max-width: 800px) {
-    .push, .footr {
+@media only screen and (max-width: 500px) {
+    .header-container {
         display: none;
-    }    
+    }
 }
