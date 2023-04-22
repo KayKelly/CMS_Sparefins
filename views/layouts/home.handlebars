@@ -77,16 +77,12 @@
 <script>
   const mobileSize = window.matchMedia('(max-width: 500px)');
   const navbar = document.querySelector('.navbar-brand');
+  const mobileTitle = document.createElement('h1');
+  mobileTitle.classList.add('mobile-title');
+  mobileTitle.innerHTML += 'SPAREFINS';   
   if (mobileSize.matches) {
-    console.log('-500');
-    const mobileTitle = document.createElement('p');
-    mobileTitle.classList.add('mobile-title');
-    mobileTitle.innerHTML += 'SPAREFINS';   
-    navbar.after(mobileTitle); 
-    console.log(navbar);
-    console.log(mobileTitle);
-  } else {
-    mobileTitle.style.display = 'none';
+    navbar.after(mobileTitle);
+    navbar.style.display = 'none';
   }
 </script>
   </body>
