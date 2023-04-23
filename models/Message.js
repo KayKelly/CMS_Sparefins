@@ -23,6 +23,9 @@ const messageSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post'
   },
+  originalPostTitle: {
+    type: String
+  },
   read: {
     type: Boolean,
     default: false
