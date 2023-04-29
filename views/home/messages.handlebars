@@ -3,7 +3,15 @@
     {{#if messages}}
     {{#each messages}}
     <div class="card mt-2">
-        <div class="card-header">From: <strong><a href="/profile/{{sender._id}}">{{sender.firstName}}</a></strong> about: <strong><a href="/post/{{originalPost.slug}}">{{originalPost.title}}</a></strong> </div>
+        {{#if originalMessage}}
+        <div class="card-header"><h4 class="card-title">Reply from: <strong><a href="/profile/{{sender._id}}">{{sender.firstName}}</a></strong></h4>
+        <h6 class="card-subtitle">Your message: {{originalMessage}}</h6></div>
+        {{else}}
+        <div class="card-header">
+          <h4 class="card-title">From: <strong><a href="/profile/{{sender._id}}">{{sender.firstName}}</a></strong></h4>
+          <h6 class="card-subtitle">About: <a href="/post/{{originalPost.slug}}">{{originalPost.title}}</a></h6>
+        </div>
+        {{/if}}
         <div class="card-body">
         {{messageBody}}
         </div>
@@ -14,7 +22,7 @@
 <div class="modal fade" id="sendMessage" tabindex="-1" aria-labelledby="sendMessage" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <form id="messageForm" action="/messages/send-message/{{sender._id}}/{{originalPost.slug}}" method="POST">
+                  <form id="messageForm" action="/messages/reply/{{recipient._id}}/{{id}}" method="POST">
                     <div class="modal-header">
                       <h2 class="modal-title fs-5" id="sendMessageTitle">Reply to {{sender.firstName}}</h2>
                     </div>

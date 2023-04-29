@@ -60,6 +60,33 @@ router.get('/:id', (req, res) => {
     }
   }); 
 
+  router.post('/reply/:recipientId/:originalMessage', async (req,res)=>{
+    try {
+      const sender = await User.findById(req.user.id);
+      const recipient = await User.findById(req.params.recipientId);
+      const originalMessage = await Message.findById(req.params.originalMessage);
+
+      const newMessage = new Message({
+        sender: sender._id,
+        senderName: sender.firstName,
+        recipient: recipient._id,
+        recipientName: recipient.firstName,
+        messageBody: req.body.message,
+        originalMessage: originalMessage.messageBody
+      });
+  
+      // Save the message to the database
+      const savedMessage = await newMessage.save();
+
+      console.log(savedMessage);
+      req.flash('success_message', 'Message sent!');
+      res.redirect('/');
+    } catch (error) {
+      console.log(`Could not send message because ${error}`);
+      res.status(500).json({ error: 'Internal server error' });
+    };
+  });
+
   router.post('/delete-message/:id', async (req, res) => {
     try {
       const deletedMessage = await Message.findByIdAndDelete(req.params.id);
