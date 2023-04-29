@@ -3,7 +3,7 @@
     {{#if messages}}
     {{#each messages}}
     <div class="card mt-2">
-        <div class="card-header">From: <strong><a href="/profile/{{sender._id}}">{{sender.firstName}}</a></strong> about: <strong>{{originalPost.title}}</strong> </div>
+        <div class="card-header">From: <strong><a href="/profile/{{sender._id}}">{{sender.firstName}}</a></strong> about: <strong><a href="/post/{{originalPost.slug}}">{{originalPost.title}}</a></strong> </div>
         <div class="card-body">
         {{messageBody}}
         </div>
