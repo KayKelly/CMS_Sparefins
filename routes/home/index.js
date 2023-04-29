@@ -40,21 +40,28 @@ router.get('/', (req, res)=>{
         });
     });
 });
-
-router.post('/filter', (req, res) => {
-    const selectedSizes = req.body.size; // An array of selected sizes
-    // Find all posts with size in the selectedSizes array
-    Post.find({ size: { $in: selectedSizes } })
-      .then(posts => {
-        console.log(selectedSizes);
-        res.render('home/index', { posts }); // Render the home page with the filtered posts
+  
+router.get('/filter', (req, res) => {
+    const finType = req.query.finType;
+    const finSize = req.query.finSize;
+    const finSetup = req.query.finSetup;
+    let query = {};
+    if (finType) { query.type = finType; }
+    if (finSize) { query.size = finSize; }
+    if (finSetup) { query.setup = finSetup; }
+    Post.find(query)
+        .populate('user')
+        .then((filteredListings) => {
+        console.log(filteredListings);
+        res.render('home/filter', { filteredListings });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-        res.status(500).send('Server error');
+        res.status(500).send('Error retrieving filtered listings');
       });
   });
   
+
   
 
 router.get('/post/:slug', (req, res)=>{

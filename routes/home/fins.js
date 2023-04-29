@@ -10,17 +10,6 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-// router.get('/add-listing', (req, res) => {
-//     if (!req.user) {
-//       req.session.returnTo = req.baseUrl + req.path;
-//       console.log('returnTo set to:', req.session.returnTo);
-//       req.flash('error', 'You have to be logged in to add a listing');
-//       return res.redirect('/login');
-//     }
-//     res.render('home/listings/add-listing');
-//   });
-
-
 router.post('/add-listing', (req, res)=>{
     let errors = [];
 
