@@ -53,7 +53,7 @@ router.get('/filter', (req, res) => {
         .populate('user')
         .then((filteredListings) => {
         console.log(filteredListings);
-        res.render('home/filter', { filteredListings });
+        res.render('home/index', { filteredListings });
       })
       .catch((err) => {
         console.error(err);
