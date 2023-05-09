@@ -36,6 +36,7 @@
     "mongoose-url-slugs": "^0.1.4",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "sharp": "^0.32.1",
     "socket.io": "^4.6.1"
   }
 }

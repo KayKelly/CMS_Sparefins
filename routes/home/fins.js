@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post');
 const AWS = require('aws-sdk');
+const sharp = require('sharp');
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -29,25 +30,37 @@ router.post('/add-listing', (req, res)=>{
 
         console.log('File received:', filename);
 
-        const params = {
-            Bucket: process.env.S3_BUCKET,
-            Key: filename,
-            Body: file.data
-        };
+        const compressedFilename = `${filename}-compressed`;
 
-        console.log('S3 upload params:', params);
-        console.log(process.env.TEST);
-
-        s3.upload(params, (err, data)=> {
-            if (err) {
-                console.log(`Could not upload file because ${err}`);
-                return;
-            }
-            console.log(`File uploaded successfully. Location: ${data.Location}`);
-        });
-    } else {
-        console.log('No file received');
-    };
+        sharp(file.data)
+            .toBuffer()
+            .then(data =>{
+                
+                const params = {
+                    Bucket: process.env.S3_BUCKET,
+                    Key: compressedFilename,
+                    Body: data,
+                    ContentType: file.mimetype,
+                };
+                
+                console.log('S3 upload params:', params);
+                console.log(process.env.TEST);
+                
+                s3.upload(params, (err, data)=> {
+                    if (err) {
+                        console.log(`Could not upload file because ${err}`);
+                        return;
+                    }
+                    console.log(`File uploaded successfully. Location: ${data.Location}`);
+                });
+            })
+            .catch(error =>{
+                console.log('Error compressing the image:', error);
+            });
+            
+            } else {
+                console.log('No file received');
+            };
 
         const newPost = new Post({
             user: req.user.id,
