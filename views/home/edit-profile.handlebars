@@ -43,7 +43,6 @@
         <tr>
             <th>Title</th>
             <th>Date</th>
-            <th>Category</th>
         </tr>
     </thead>
     <tbody>
@@ -51,9 +50,8 @@
         <tr>
             <td>{{title}}</td>
             <td>{{generateTime date 'DD MMMM YYYY'}}</td>
-            <td>{{category.name}}</td>
             <td><a href="/post/{{id}}">View Post</a></td>
-            <td><a href="/admin/posts/edit/{{_id}}" class="btn btn-info">Edit</a></td>
+            <td><a href="/listings/edit/{{_id}}" class="btn btn-info">Edit</a></td>
             <td><form action="/listings/{{_id}}?_method=DELETE" method="post">
             <button type="submit" class="btn btn-danger">Delete</button></form></td>
         </tr>

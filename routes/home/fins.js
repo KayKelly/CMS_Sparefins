@@ -30,15 +30,13 @@ router.post('/add-listing', (req, res)=>{
 
         console.log('File received:', filename);
 
-        const compressedFilename = `${filename}-compressed`;
-
         sharp(file.data)
             .toBuffer()
             .then(data =>{
                 
                 const params = {
                     Bucket: process.env.S3_BUCKET,
-                    Key: compressedFilename,
+                    Key: filename,
                     Body: data,
                     ContentType: file.mimetype,
                 };
@@ -79,6 +77,69 @@ router.post('/add-listing', (req, res)=>{
             console.log(`Could not save the post because ${error}`);
         });   
     }
+});
+
+router.get('/edit/:id', (req, res)=>{
+    Post.findOne({_id: req.params.id}).then(post=>{
+         res.render('home/listings/edit-listing', {post: post});
+    })
+    .catch(error => console.log(error));
+});
+
+router.put('/edit/:id', (req, res)=>{
+
+    let filename = '';
+
+    if (req.files && req.files.file && req.files.file.size > 0) {
+        let file = req.files.file;
+        filename = `${Date.now()}-${file.name}`;
+
+        console.log('File received:', filename);
+
+        sharp(file.data)
+            .toBuffer()
+            .then(data =>{
+                
+                const params = {
+                    Bucket: process.env.S3_BUCKET,
+                    Key: filename,
+                    Body: data,
+                    ContentType: file.mimetype,
+                };
+                
+                console.log('S3 upload params:', params);
+                console.log(process.env.TEST);
+                
+                s3.upload(params, (err, data)=> {
+                    if (err) {
+                        console.log(`Could not upload file because ${err}`);
+                        return;
+                    }
+                    console.log(`File uploaded successfully. Location: ${data.Location}`);
+                });
+            })
+            .catch(error =>{
+                console.log('Error compressing the image:', error);
+            });
+            
+            } else {
+                console.log('No file received');
+            };
+    
+    Post.findOne({_id: req.params.id}).then(post=>{
+        post.user = req.user.id;
+        post.title = req.body.title;
+        post.body = req.body.description;
+        post.file = filename;
+        post.type = req.body.finType;
+        post.size = req.body.finSize;
+        post.setup = req.body.finSetup;
+
+        post.save().then(updatedPost=>{
+            req.flash('success_message', `Post ${updatedPost.title} was updated successfully`);
+            res.redirect(`/edit-profile/${post.user}`);
+        });
+    });
 });
 
 router.delete('/:id', (req, res)=>{
