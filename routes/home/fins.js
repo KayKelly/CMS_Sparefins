@@ -123,6 +123,7 @@ router.put('/edit/:id', (req, res)=>{
             });
             
             } else {
+                filename = req.body.existingFile;
                 console.log('No file received');
             };
     

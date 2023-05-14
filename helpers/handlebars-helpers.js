@@ -38,9 +38,15 @@ module.exports = {
         } else {
             output += `<li class="page-item"><a href="?page=${options.hash.pages}" class="page-link">Last</a></li>`;
         }
-
-
         return output;
-    }      
+    },
+
+ifCond: (v1, v2, options)=>{
+    if (v1 && v2 && String(v1) === String(v2)) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  }
+  
 
 };

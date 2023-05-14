@@ -5,7 +5,9 @@
         <label for="title">Title</label>
         <input name="title" type="text" class="form-control" id="title" value="{{post.title}}">
     </div>
+        <img src="https://sparefins.s3.amazonaws.com/{{post.file}}" class="img-thumbnail" width="100px" height="auto" alt="post iamge">
     <div class="form-group">
+        <input type="hidden" name="existingFile" value="{{post.file}}">
         <label for="file">File Upload</label>
         <input type="file" name="file" class="form-control">
     </div>

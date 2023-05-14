@@ -27,8 +27,8 @@ mongoose.connect(mongoDbUrl, {useNewUrlParser: true}).then((db)=> {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set view engine
-const { select, generateTime, paginate } = require('./helpers/handlebars-helpers');
-app.engine('handlebars', exphbs.engine({handlebars: allowInsecurePrototypeAccess(Handlebars), defaultLayout: 'home', helpers: { select: select, generateTime: generateTime, paginate: paginate }}));
+const { select, generateTime, paginate, ifCond } = require('./helpers/handlebars-helpers');
+app.engine('handlebars', exphbs.engine({handlebars: allowInsecurePrototypeAccess(Handlebars), defaultLayout: 'home', helpers: { select: select, generateTime: generateTime, paginate: paginate, ifCond: ifCond }}));
 app.set('view engine', 'handlebars');
 
 app.use(session({
