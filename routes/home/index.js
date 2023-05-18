@@ -7,6 +7,7 @@ const bcryptjs = require('bcryptjs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const Message = require('../../models/Message');
+const { requiresAuth } = require('express-openid-connect');
 
 // Middleware function to retrieve the number of unread messages for the current user
 router.use(async (req, res, next) => {
@@ -160,16 +161,16 @@ router.post('/login', (req, res, next) => {
   });
   
   
-  router.get('/listings/add-listing', (req, res) => {
-    console.log('add-listing middleware called');
-    if (!req.user) {
-      req.session.returnTo = req.originalUrl;
-      console.log('returnTo set to:', req.session.returnTo);
-      req.flash('error', 'You have to be logged in to add a listing');
-      return res.redirect('/login');
-    } else {
-        res.render('home/listings/add-listing');
-    }
+  router.get('/listings/add-listing', requiresAuth(), (req, res) => {
+    // if (!req.user) {
+    //   req.session.returnTo = req.originalUrl;
+    //   console.log('returnTo set to:', req.session.returnTo);
+    //   req.flash('error', 'You have to be logged in to add a listing');
+    //   return res.redirect('/login');
+    // } else {
+    //     res.render('home/listings/add-listing');
+    // }
+    res.render('home/listings/add-listing');
   });
   
 router.get('/logout', (req, res, next)=>{
