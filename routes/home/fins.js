@@ -147,7 +147,7 @@ router.delete('/:id', (req, res)=>{
     Post.findOne({_id: req.params.id})
         .then(post=>{
                 post.remove().then(postRemoved=>{
-                    req.flash('delete_message', `Post was deleted successfully`);
+                    req.flash('delete_message', `${postRemoved.title} was deleted successfully`);
                     res.redirect(req.get('referer'));
                 });
             });

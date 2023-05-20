@@ -21,6 +21,8 @@
             <td>{{category.name}}</td>
             <td>{{allowComments}}</td>
             <td><a href="/post/{{slug}}">View Post</a></td>
+            <td><form action="/admin/posts/{{_id}}?_method=DELETE" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button></form></td>
         </tr>
         {{/each}}
     </tbody>

@@ -12,7 +12,6 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const {mongoDbUrl} = require('./config/database');
 const passport = require('passport');
-const { auth } = require('express-openid-connect');
 require('dotenv').config();
 
 
@@ -55,18 +54,6 @@ app.use(flash());
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-//Auth0
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: process.env.AUTH0_SECRET,
-    baseURL: 'http://localhost:4500',
-    clientID: process.env.AUTH0_ID,
-    issuerBaseURL: 'https://dev-va6ihonr3x3u4ab4.au.auth0.com'
-};
-
-app.use(auth(config));
 
 // local variables using middleware
 app.use((req, res, next)=>{

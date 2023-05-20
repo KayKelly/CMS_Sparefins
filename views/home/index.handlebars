@@ -12,7 +12,12 @@
             <h5 class="card-title">{{title}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">By: <a href="profile/{{user.id}}">{{user.firstName}}</a></h6>
             <p class="card-text">{{{body}}}</p>
-            <p><small>{{type}}, {{setup}}, {{size}}</small></p>
+            <div class="d-flex justify-content-between">
+        <span><span class="badge border text-secondary">{{type}}</span></span>
+        <span><span class="badge border text-secondary">{{setup}}</span></span>
+        <span><span class="badge border text-secondary">{{size}}</span></span>
+      </div>
+            {{!-- <p><small>{{type}}, {{setup}}, {{size}}</small></p> --}}
           </div>
           <div class="card-footer" style="display:flex; justify-content:space-around; overflow:hidden;">
             <small><a href="post/{{slug}}" class="btn btn-dark"><i class="fa fa-eye"></i></a></small>
@@ -51,7 +56,12 @@
             <h5 class="card-title">{{title}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">By: <a href="profile/{{user.id}}">{{user.firstName}}</a></h6>
             <p class="card-text">{{{body}}}</p>
-            <p><small>{{type}}, {{setup}}, {{size}}</small></p>
+            <div class="d-flex justify-content-between">
+        <span><span class="badge border text-secondary">{{type}}</span></span>
+        <span><span class="badge border text-secondary">{{setup}}</span></span>
+        <span><span class="badge border text-secondary">{{size}}</span></span>
+      </div>
+            {{!-- <p><small>{{type}}, {{setup}}, {{size}}</small></p> --}}
           </div>
           <div class="card-footer" style="display:flex; justify-content:space-around; overflow:hidden;">
             <small><a href="post/{{slug}}" class="btn btn-dark"><i class="fa fa-eye"></i></a></small>

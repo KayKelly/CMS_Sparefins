@@ -127,12 +127,11 @@ router.put('/edit/:id', (req, res)=>{
 router.delete('/:id', (req, res)=>{
     Post.findOne({_id: req.params.id})
         .then(post=>{
-            fs.unlink(uploadDir + post.file, (err)=>{
-                post.remove().then(postRemoved=>{
-                    res.redirect('/admin/posts/my-posts');
-                    req.flash('delete_message', `Post was deleted successfully`);
-                });
+            post.remove().then(postRemoved=>{
+                req.flash('delete_message', `${postRemoved.title} was deleted successfully`);
+                res.redirect('/admin/posts');
             });
         });
 });
+
 module.exports = router;
