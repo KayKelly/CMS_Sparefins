@@ -1,0 +1,40 @@
+<div class="col-sm-3" style="margin-bottom:10px;">
+        <div class="card h-100">
+          <img src="https://sparefins.s3.amazonaws.com/{{file}}" onerror="this.src='/images/sparefinsLogo.png';" class="card-img-top" style="object-fit:scale-down;width:100%;height:30vh;">
+          <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">By: <a href="profile/{{user.id}}">{{user.firstName}}</a></h6>
+            <p class="card-text">{{{body}}}</p>
+            <div class="d-flex justify-content-between">
+        <span><span class="badge border text-secondary">{{type}}</span></span>
+        <span><span class="badge border text-secondary">{{setup}}</span></span>
+        <span><span class="badge border text-secondary">{{size}}</span></span>
+      </div>
+          </div>
+          <div class="card-footer" style="display:flex; justify-content:space-around; overflow:hidden;">
+            <small><a href="post/{{slug}}" class="btn btn-dark"><i class="fa fa-eye"></i></a></small>
+            {{#ifCond user._id ../userId }}
+            <small><a href="/listings/edit/{{../_id}}" class="btn btn-info"><i class="fa fa-edit"></i></a></small>
+            {{/ifCond}}
+            <small><button class="btn btn-success" id="messageButton" data-bs-toggle="modal" data-bs-target="#sendMessage-{{_id}}"><i class="fa fa-comment"></i></button></small>            <!-- Modal -->
+            <div class="modal fade" id="sendMessage-{{_id}}" tabindex="-1" aria-labelledby="sendMessage" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <form id="messageForm" action="/messages/send-message/{{user._id}}/{{slug}}" method="POST">
+                    <div class="modal-header">
+                      <h2 class="modal-title fs-5" id="sendMessageTitle">Message {{user.firstName}} about {{title}}</h2>
+                    </div>
+                    <div class="modal-body">
+                      <textarea id="message" name="message" class="form-control" placeholder="Your message.."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

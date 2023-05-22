@@ -138,7 +138,7 @@ router.put('/edit/:id', (req, res)=>{
 
         post.save().then(updatedPost=>{
             req.flash('success_message', `Post ${updatedPost.title} was updated successfully`);
-            res.redirect(`/edit-profile/${post.user}`);
+            res.redirect(`/your-profile/${post.user}`);
         });
     });
 });

@@ -1,11 +1,11 @@
-<h1>Edit Post</h1>
+<h1>Edit Listing</h1>
 
 <form action="/listings/edit/{{post.id}}?_method=PUT" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Title</label>
         <input name="title" type="text" class="form-control" id="title" value="{{post.title}}">
     </div>
-        <img src="https://sparefins.s3.amazonaws.com/{{post.file}}" class="img-thumbnail" width="100px" height="auto" alt="post iamge">
+        <img src="https://sparefins.s3.amazonaws.com/{{post.file}}" onerror="this.src='/images/sparefinsLogo.png';" class="img-thumbnail" width="100px" height="auto" alt="post image">
     <div class="form-group">
         <input type="hidden" name="existingFile" value="{{post.file}}">
         <label for="file">File Upload</label>
@@ -69,7 +69,7 @@
 </div>
     </div>
     <div class="form-group">
-        <textarea name="body" cols="30" rows="10" class="form-control" id="body">{{post.body}}</textarea>
+        <textarea name="body" cols="30" rows="10" class="form-control" id="body">{{post.description}}</textarea>
     </div>
     <div class="form-group">
     <button type="submit" class="btn btn-primary">Update Post</button>

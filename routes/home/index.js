@@ -82,7 +82,7 @@ router.get('/password-reset', (req, res)=>{
     res.render('home/password-reset');
 });
 
-router.get('/edit-profile/:id', (req, res)=>{
+router.get('/your-profile/:id', (req, res)=>{
     User.findOne({_id: req.params.id})
         .then(foundUser => {
             if (!foundUser) {
@@ -95,7 +95,7 @@ router.get('/edit-profile/:id', (req, res)=>{
             }
             Post.find({user: req.params.id})
                 .then(posts =>{
-                    res.render('home/edit-profile', { user: foundUser, posts: posts });
+                    res.render('home/your-profile', { user: foundUser, posts: posts });
                 })
         })
         .catch(error => {
