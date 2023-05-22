@@ -11,63 +11,7 @@
         <label for="file">File Upload</label>
         <input type="file" name="file" class="form-control">
     </div>
-    <div class="form-group">
-        <label for="listingFinType">Fin Type</label>
-<div class="form-check">
-  <label class="form-check-label form-check-inline" for="fcs">
-    <input class="form-check-input form-check-inline" type="radio" id="fcs" name="finType" value="fcs" {{#ifCond post.type "fcs"}}checked{{/ifCond}}> FCS
-  </label>
-  <label class="form-check-label form-check-inline" for="fcs-2">
-    <input class="form-check-input form-check-inline" type="radio" id="fcs-2" name="finType" value="fcs2" {{#ifCond post.type "fcs2"}}checked{{/ifCond}}> FCS 2
-  </label>
-  <label class="form-check-label form-check-inline" for="futures">
-    <input class="form-check-input form-check-inline" type="radio" id="futures" name="finType" value="futures" {{#ifCond post.type "futures"}}checked{{/ifCond}}> Futures
-  </label>
-  <label class="form-check-label form-check-inline" for="other">
-    <input class="form-check-input form-check-inline" type="radio" id="other" name="finType" value="other" {{#ifCond post.type "other"}}checked{{/ifCond}}> Other
-  </label>
-</div>
-<div class="form-group">
-  <label for="listingFinType">Fin Size</label>
-  <div class="form-check">
-    <label class="form-check-label form-check-inline" for="finExtraSmall">
-      <input class="form-check-input form-check-inline" type="radio" id="finExtraSmall" name="finSize" value="extra-small" {{#ifCond post.size "extra-small"}}checked{{/ifCond}}> Extra Small
-    </label>
-    <label class="form-check-label form-check-inline" for="finSmall">
-      <input class="form-check-input form-check-inline" type="radio" id="finSmall" name="finSize" value="small" {{#ifCond post.size "small"}}checked{{/ifCond}}> Small
-    </label>
-    <label class="form-check-label form-check-inline" for="finMedium">
-      <input class="form-check-input form-check-inline" type="radio" id="finMedium" name="finSize" value="medium" {{#ifCond post.size "medium"}}checked{{/ifCond}}> Medium
-    </label>
-    <label class="form-check-label form-check-inline" for="finLarge">
-      <input class="form-check-input form-check-inline" type="radio" id="finLarge" name="finSize" value="large" {{#ifCond post.size "large"}}checked{{/ifCond}}> Large
-    </label>
-    <label class="form-check-label form-check-inline" for="finExtraLarge">
-      <input class="form-check-input form-check-inline" type="radio" id="finExtraLarge" name="finSize" value="extra-large" {{#ifCond post.size "extra-large"}}checked{{/ifCond}}> Extra Large
-    </label>
-  </div>
-</div>
-<div class="form-group">
-  <label for="listingFinType">Setup</label>
-  <div class="form-check">
-    <label class="form-check-label form-check-inline" for="singleFin">
-      <input class="form-check-input form-check-inline" type="radio" id="singleFin" name="finSetup" value="single-fin" {{#ifCond post.setup "single-fin"}}checked{{/ifCond}}> Single Fin
-    </label>
-    <label class="form-check-label form-check-inline" for="twinFin">
-      <input class="form-check-input form-check-inline" type="radio" id="twinFin" name="finSetup" value="twin-fin" {{#ifCond post.setup "twin-fin"}}checked{{/ifCond}}> Twin Fin
-    </label>
-    <label class="form-check-label form-check-inline" for="twoPlusOne">
-      <input class="form-check-input form-check-inline" type="radio" id="twoPlusOne" name="finSetup" value="two-plus-one" {{#ifCond post.setup "two-plus-one"}}checked{{/ifCond}}> 2 + 1
-    </label>
-    <label class="form-check-label form-check-inline" for="thruster">
-      <input class="form-check-input form-check-inline" type="radio" id="thruster" name="finSetup" value="thruster" {{#ifCond post.setup "thruster"}}checked{{/ifCond}}> Thruster
-    </label>
-    <label class="form-check-label form-check-inline" for="quadFin">
-      <input class="form-check-input form-check-inline" type="radio" id="quadFin" name="finSetup" value="quad-fin" {{#ifCond post.setup "quad-fin"}}checked{{/ifCond}}> Quad Fin
-    </label>
-  </div>
-</div>
-    </div>
+    {{> home/fin-options}}
     <div class="form-group">
         <textarea name="body" cols="30" rows="10" class="form-control" id="body">{{post.description}}</textarea>
     </div>

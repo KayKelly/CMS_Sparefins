@@ -26,6 +26,9 @@ const PostSchema = new Schema({
     setup: {
         type: String,
     },
+    position: {
+        type: Array,
+    },
     file: {
         type: String,
     },

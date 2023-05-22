@@ -24,6 +24,9 @@ const FinSchema = new Schema({
     setup: {
         type: String,
     },
+    position: {
+        type: String,
+    },
     file: {
         type: String,
     },

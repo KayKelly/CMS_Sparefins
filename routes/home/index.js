@@ -46,10 +46,12 @@ router.get('/filter', (req, res) => {
     const finType = req.query.finType;
     const finSize = req.query.finSize;
     const finSetup = req.query.finSetup;
+    const finPosition = req.query.finPosition;
     let query = {};
     if (finType) { query.type = finType; }
     if (finSize) { query.size = finSize; }
     if (finSetup) { query.setup = finSetup; }
+    if (finPosition) { query.position = finPosition; }
     Post.find(query)
         .populate('user')
         .then((filteredListings) => {

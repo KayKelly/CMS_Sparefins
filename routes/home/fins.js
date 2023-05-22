@@ -67,7 +67,8 @@ router.post('/add-listing', (req, res)=>{
             file: filename,
             type: req.body.finType,
             size: req.body.finSize,
-            setup: req.body.finSetup
+            setup: req.body.finSetup,
+            position: req.body.finPosition
         })
         newPost.save().then(savedPost =>{
             console.log(savedPost);
@@ -135,6 +136,7 @@ router.put('/edit/:id', (req, res)=>{
         post.type = req.body.finType;
         post.size = req.body.finSize;
         post.setup = req.body.finSetup;
+        post.position = req.body.finPosition;
 
         post.save().then(updatedPost=>{
             req.flash('success_message', `Post ${updatedPost.title} was updated successfully`);

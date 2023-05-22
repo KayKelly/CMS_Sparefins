@@ -41,12 +41,16 @@ module.exports = {
         return output;
     },
 
-ifCond: (v1, v2, options)=>{
-    if (v1 && v2 && String(v1) === String(v2)) {
-      return options.fn(this);
-    }
-    return options.inverse(this);
-  }
-  
+    ifCond: function(v1, v2, options) {
+        if (Array.isArray(v1)) {
+          if (v1.includes(v2)) {
+            return options.fn(this);
+          }
+        } else if (String(v1) === String(v2)) {
+          return options.fn(this); 
+        }
+        return options.inverse(this); 
+      }
+      
 
 };
