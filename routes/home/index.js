@@ -7,6 +7,8 @@ const bcryptjs = require('bcryptjs');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const Message = require('../../models/Message');
+const { body, validationResult } = require('express-validator');
+const sanitizeHtml = require('sanitize-html');
 
 // Middleware function to retrieve the number of unread messages for the current user
 router.use(async (req, res, next) => {
@@ -126,10 +128,6 @@ router.get('/profile/:id', (req, res) => {
         });
 });
 
-router.get('/login', (req, res)=>{
-    res.render('home/login');
-});
-
 passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done)=>{
     User.findOne({email: email}).then(user=>{
         if(!user) return done(null, false, {message: 'No user found'});
@@ -153,20 +151,60 @@ passport.deserializeUser((id, done) =>{
     });
 });
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-      successRedirect: req.session.returnTo || '/',
-      failureRedirect: 'home/login',
-      failureFlash: true
-    })(req, res, next);
-  });  
+router.post('/login', [
+  body('email')
+    .notEmpty().withMessage('Please enter an email address')
+    .isEmail().withMessage('Please enter a valid email address')
+    .trim()
+    .normalizeEmail()
+    .customSanitizer(value => sanitizeHtml(value)),
+  body('password')
+    .notEmpty().withMessage('Please enter a password')
+    .trim()
+    .customSanitizer(value => sanitizeHtml(value)),
+], (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    if (req.xhr || req.headers.accept.includes('json')) {
+      return res.status(400).json({ success: false, errors: errors.array()})
+    } else {
+      return res.render('home/index', {loginErrors: errors.array() });
+    }
+  }
+
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      // Handle authentication error
+      return res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+    if (!user) {
+      // Handle login failure
+      if (req.xhr || req.headers.accept.includes('json')) {
+        return res.status(401).json({ success: false, message: 'Invalid email or password' });
+      } else {
+        // Pass the loginErrors variable to the template
+        return res.render('home/index', { loginErrors: [{ message: 'Invalid email or password' }] });
+      }
+    }
+    // Handle successful login
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: 'Internal server error' });
+      }
+      req.flash('success_message', 'Login successful');
+      res.render('home/index');
+      });
+  })(req, res, next);
+});
+
+
   
   router.get('/listings/add-listing', (req, res) => {
     if (!req.user) {
       req.session.returnTo = req.originalUrl;
       console.log('returnTo set to:', req.session.returnTo);
       req.flash('error', 'You have to be logged in to add a listing');
-      return res.redirect('/login');
+      return res.redirect('/');
     } else {
         res.render('home/listings/add-listing');
     }
@@ -178,59 +216,70 @@ router.get('/logout', (req, res, next)=>{
     });
     res.redirect('/');
 });
-router.get('/register', (req, res)=>{
-    res.render('home/register');
-});
-router.post('/register', (req, res)=>{
-    let errors = [];
-    
-    if(!req.body.firstName){
-        errors.push({message: 'Please enter a first name'});
+
+router.post('/register', [
+  body('firstName').notEmpty().withMessage('Please enter a first name'),
+  body('lastName').notEmpty().withMessage('Please enter a last name'),
+  body('email').notEmpty().withMessage('Please enter an email address').isEmail().withMessage('Please enter a valid email address'),
+  body('password').notEmpty().withMessage('Please enter a password'),
+  body('passwordConfirm').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error(`The passwords don't match`);
     }
-    if(!req.body.lastName){
-        errors.push({message: 'Please enter a last name'});
+    return true;
+  }),
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    if (req.xhr || req.headers.accept.includes('json')) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    } else {
+      return res.render('home/index', {
+        registerErrors: errors.array().map(error => error.msg), // Access error messages using error.msg
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        errors: errors.array().map(error => error.msg) // Access error messages using error.msg
+      });
     }
-    if(!req.body.email){
-        errors.push({message: 'Please enter an email address'});
-    }
-    if(!req.body.password){
-        errors.push({message: 'Please enter a password'});
-    }
-    if(req.body.password !== req.body.passwordConfirm){
-        errors.push({message: "The passwords don't match"});
-    }
-    if(errors.length > 0){
-        res.render('home/register', {
-            errors: errors,
+  } else {
+    User.findOne({ email: req.body.email }).then(user => {
+      if (!user) {
+        const newUser = new User({
+          firstName: sanitizeHtml(req.body.firstName),
+          lastName: sanitizeHtml(req.body.lastName),
+          email: sanitizeHtml(req.body.email),
+          password: sanitizeHtml(req.body.password)
+        });
+
+        bcryptjs.genSalt(10, (err, salt) => {
+          bcryptjs.hash(newUser.password, salt, (err, hash) => {
+            newUser.password = hash;
+            newUser.save().then(savedUser => {
+              req.flash('success_message', 'You are now registered. Please login');
+              res.status(200).json({ success: true, message: `Welcome ${savedUser.firstName}, you are now registered` });
+            });
+          });
+        });
+      } else {
+        if (req.xhr || req.headers.accept.includes('json')) {
+          return res.status(400).json({ success: false, message: 'Email already registered. Please login' });
+        } else {
+          req.flash('error_message', 'Email already registered. Please login');
+          return res.render('home/index', {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-        })
-    } else {
-        User.findOne({email: req.body.email}).then(user=>{
-            if(!user){
-                const newUser = new User({
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    email: req.body.email,
-                    password: req.body.password
-                });
-        
-                bcryptjs.genSalt(10, (err, salt)=>{
-                    bcryptjs.hash(newUser.password, salt, (err, hash)=>{
-                        newUser.password = hash;
-                        newUser.save().then(savedUser=>{
-                            req.flash('success_message', 'You are now registered. Please login');
-                            res.redirect('/login');
-                        });
-                    });
-                });
-            } else {
-                req.flash('error_message', 'That email is already registered. Please login')
-                res.redirect('/login');
-            }
-        });
-    };
+            errors: []
+          });
+        }
+      }
+    });
+  }
 });
+
+
+
+  
 
 module.exports = router;

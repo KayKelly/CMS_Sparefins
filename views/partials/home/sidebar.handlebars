@@ -1,76 +1,110 @@
-   <div class="col-md-3">
-
-          <!-- Filters Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Filters</h5>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-6">
-                    <form action="/filter" method="get" id="filter-form">
-                    <div class="form-group" id="listingFinType">
-                <strong><label for="listingFinType">Fin Type</label></strong>
-                <div class="form-check">
-                    <label class="form-check-label form-check-inline" for="fcs">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="fcs" name="finType" value="fcs"> FCS</label>
-                    <label class="form-check-label form-check-inline" for="fcs-2">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="fcs-2" name="finType" value="fcs2"> FCS 2</label>
-                    <label class="form-check-label form-check-inline" for="futures">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="futures" name="finType" value="futures"> Futures</label>
-                    <label class="form-check-label form-check-inline" for="other">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="other" name="finType" value="other"> Other</label>
-                </div>
+<div class="col-sm-2">
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filters" aria-expanded="true" aria-controls="collapseOne">
+        Filters
+        </button>
+    </h2>
+    <div id="filters" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+        <form action="/filter" method="get" id="filter-form">
+            <div class="form-group" id="listingFinType">
+            <strong><label for="listingFinType">Fin Type</label></strong>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="fcs" name="finType" value="fcs">
+                <label class="form-check-label" for="fcs">FCS</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="fcs-2" name="finType" value="fcs2">
+                <label class="form-check-label" for="fcs-2">FCS 2</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="futures" name="finType" value="futures">
+                <label class="form-check-label" for="futures">Futures</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="other" name="finType" value="other">
+                <label class="form-check-label" for="other">Other</label>
+            </div>
             </div>
             <div class="form-group">
-                <strong><label for="listingFinType">Fin Size</label></strong>
-                <div class="form-check">
-                    <label class="form-check-label form-check-inline" for="finExtraSmall">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="finExtraSmall" name="finSize" value="extra-small"> Extra Small</label>
-                    <label class="form-check-label form-check-inline" for="finSmall">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="finSmall" name="finSize" value="small"> Small</label>
-                    <label class="form-check-label form-check-inline" for="finMedium">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="finMedium" name="finSize" value="medium"> Medium</label>
-                    <label class="form-check-label form-check-inline" for="finLarge">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="finLarge" name="finSize" value="large"> Large</label>
-                    <label class="form-check-label form-check-inline" for="finExtraLarge">
-                        <input class="form-check-input form-check-inline" type="checkbox" id="finExtraLarge" name="finSize" value="extra-large"> Extra Large</label>
-                </div>
+            <strong><label for="listingFinType">Fin Size</label></strong>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="finExtraSmall" name="finSize" value="extra-small">
+                <label class="form-check-label" for="finExtraSmall">Extra Small</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="finSmall" name="finSize" value="small">
+                <label class="form-check-label" for="finSmall">Small</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="finMedium" name="finSize" value="medium">
+                <label class="form-check-label" for="finMedium">Medium</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="finLarge" name="finSize" value="large">
+                <label class="form-check-label" for="finLarge">Large</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="finExtraLarge" name="finSize" value="extra-large">
+                <label class="form-check-label" for="finExtraLarge">Extra Large</label>
+            </div>
             </div>
             <div class="form-group">
-                <strong><label for="listingFinType">Setup</label></strong>
-                <div class="form-check">
-                    <label class="form-check-label form-check-inline" for="singleFin">
-                        <input class="form-check-input form-check-inline filter-checkbox" type="checkbox" id="singleFin" name="finSetup" value="single-fin"> Single Fin</label>
-                    <label class="form-check-label form-check-inline filter-checkbox" for="twinFin">
-                        <input class="form-check-input form-check-inline filter-checkbox" type="checkbox" id="twinFin" name="finSetup" value="twin-fin"> Twin Fin</label>
-                    <label class="form-check-label form-check-inline filter-checkbox" for="twoPlusOne">
-                        <input class="form-check-input form-check-inline filter-checkbox" type="checkbox" id="twoPlusOne" name="finSetup" value="two-plus-one"> 2 + 1</label>
-                    <label class="form-check-label form-check-inline filter-checkbox" for="thruster">
-                        <input class="form-check-input form-check-inline filter-checkbox" type="checkbox" id="thruster" name="finSetup" value="thruster"> Thruster</label>
-                    <label class="form-check-label form-check-inline filter-checkbox" for="quadFin">
-                        <input class="form-check-input form-check-inline filter-checkbox" type="checkbox" id="quadFin" name="finSetup" value="quad-fin"> Quad Fin</label>
-                </div>
+            <strong><label for="listingFinType">Setup</label></strong>
+            <div class="form-check">
+                <input class="form-check-input filter-checkbox" type="checkbox" id="singleFin" name="finSetup" value="single-fin">
+                <label class="form-check-label" for="singleFin">Single Fin</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input filter-checkbox" type="checkbox" id="twinFin" name="finSetup" value="twin-fin">
+                <label class="form-check-label" for="twinFin">Twin Fin</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input filter-checkbox" type="checkbox" id="twoPlusOne" name="finSetup" value="two-plus-one">
+                <label class="form-check-label" for="twoPlusOne">2 + 1</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input filter-checkbox" type="checkbox" id="thruster" name="finSetup" value="thruster">
+                <label class="form-check-label" for="thruster">Thruster</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input filter-checkbox" type="checkbox" id="quadFin" name="finSetup" value="quad-fin">
+                <label class="form-check-label" for="quadFin">Quad Fin</label>
+            </div>
             </div>
             <div class="form-group">
-    <label for="listingFinType">Position</label>
-        <div class="form-check">
-            <label class="form-check-label form-check-inline" for="fullSet">
-                <input class="form-check-input form-check-inline" type="checkbox" id="fullSet" name="finPosition" value="full-set"> Full Set</label>
-            <label class="form-check-label form-check-inline" for="leftFront">
-                <input class="form-check-input form-check-inline" type="checkbox" id="leftFront" name="finPosition" value="left-front"> Left Front</label>
-            <label class="form-check-label form-check-inline" for="leftRear">
-                <input class="form-check-input form-check-inline" type="checkbox" id="leftRear" name="finPosition" value="left-rear"> Left Rear</label>
-            <label class="form-check-label form-check-inline" for="center">
-                <input class="form-check-input form-check-inline" type="checkbox" id="center" name="finPosition" value="center"> Center</label>
-            <label class="form-check-label form-check-inline" for="rightFront">
-                <input class="form-check-input form-check-inline" type="checkbox" id="rightFront" name="finPosition" value="right-front"> Right Front</label>
-            <label class="form-check-label form-check-inline" for="rightRear">
-                <input class="form-check-input form-check-inline" type="checkbox" id="rightRear" name="finPosition" value="right-rear"> Right Rear</label>
-        </div>
-</div>
+            <label for="listingFinType">Position</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="fullSet" name="finPosition" value="full-set">
+                <label class="form-check-label" for="fullSet">Full Set</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="leftFront" name="finPosition" value="left-front">
+                <label class="form-check-label" for="leftFront">Left Front</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="leftRear" name="finPosition" value="left-rear">
+                <label class="form-check-label" for="leftRear">Left Rear</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="center" name="finPosition" value="center">
+                <label class="form-check-label" for="center">Center</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rightFront" name="finPosition" value="right-front">
+                <label class="form-check-label" for="rightFront">Right Front</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rightRear" name="finPosition" value="right-rear">
+                <label class="form-check-label" for="rightRear">Right Rear</label>
+            </div>
+            </div>
             <button type="submit" class="btn btn-dark">Apply Filters</button>
-            </form>
-                </div>
-              </div>
-            </div>
-          </div>
+        </form>
         </div>
+    </div>
+    </div>
+</div>
+</div>

@@ -1,76 +1,95 @@
 <div class="form-group">
-        <label for="listingFinType">Fin Type</label>
-<div class="form-check">
-  <label class="form-check-label form-check-inline" for="fcs">
-    <input class="form-check-input form-check-inline" type="radio" id="fcs" name="finType" value="FCS" {{#ifCond post.type "FCS"}}checked{{/ifCond}}> FCS
-  </label>
-  <label class="form-check-label form-check-inline" for="fcs-2">
-    <input class="form-check-input form-check-inline" type="radio" id="fcs-2" name="finType" value="FCS 2" {{#ifCond post.type "FCS 2"}}checked{{/ifCond}}> FCS 2
-  </label>
-  <label class="form-check-label form-check-inline" for="futures">
-    <input class="form-check-input form-check-inline" type="radio" id="futures" name="finType" value="Futures" {{#ifCond post.type "Futures"}}checked{{/ifCond}}> Futures
-  </label>
-  <label class="form-check-label form-check-inline" for="other">
-    <input class="form-check-input form-check-inline" type="radio" id="other" name="finType" value="Other" {{#ifCond post.type "Other"}}checked{{/ifCond}}> Other
-  </label>
-</div>
-</div>
-
-<div class="form-group">
-  <label for="listingFinType">Fin Size</label>
+  <label for="listingFinType">Fin Type</label>
   <div class="form-check">
-    <label class="form-check-label form-check-inline" for="finExtraSmall">
-      <input class="form-check-input form-check-inline" type="radio" id="finExtraSmall" name="finSize" value="Extra Small" {{#ifCond post.size "Extra Small"}}checked{{/ifCond}}> Extra Small
-    </label>
-    <label class="form-check-label form-check-inline" for="finSmall">
-      <input class="form-check-input form-check-inline" type="radio" id="finSmall" name="finSize" value="Small" {{#ifCond post.size "Small"}}checked{{/ifCond}}> Small
-    </label>
-    <label class="form-check-label form-check-inline" for="finMedium">
-      <input class="form-check-input form-check-inline" type="radio" id="finMedium" name="finSize" value="Medium" {{#ifCond post.size "Medium"}}checked{{/ifCond}}> Medium
-    </label>
-    <label class="form-check-label form-check-inline" for="finLarge">
-      <input class="form-check-input form-check-inline" type="radio" id="finLarge" name="finSize" value="Large" {{#ifCond post.size "Large"}}checked{{/ifCond}}> Large
-    </label>
-    <label class="form-check-label form-check-inline" for="finExtraLarge">
-      <input class="form-check-input form-check-inline" type="radio" id="finExtraLarge" name="finSize" value="Extra Large" {{#ifCond post.size "Extra Large"}}checked{{/ifCond}}> Extra Large
-    </label>
+    <input class="form-check-input" type="checkbox" id="fcs" name="finType" value="FCS" {{#ifCond post.type "FCS"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="fcs">FCS</label>
   </div>
-</div>
-<div class="form-group">
-  <label for="listingFinType">Setup</label>
   <div class="form-check">
-    <label class="form-check-label form-check-inline" for="singleFin">
-      <input class="form-check-input form-check-inline" type="radio" id="singleFin" name="finSetup" value="Single Fin" {{#ifCond post.setup "Single Fin"}}checked{{/ifCond}}> Single Fin
-    </label>
-    <label class="form-check-label form-check-inline" for="twinFin">
-      <input class="form-check-input form-check-inline" type="radio" id="twinFin" name="finSetup" value="Twin Fin" {{#ifCond post.setup "Twin Fin"}}checked{{/ifCond}}> Twin Fin
-    </label>
-    <label class="form-check-label form-check-inline" for="twoPlusOne">
-      <input class="form-check-input form-check-inline" type="radio" id="twoPlusOne" name="finSetup" value="Two Plus One" {{#ifCond post.setup "Two Plus One"}}checked{{/ifCond}}> 2 + 1
-    </label>
-    <label class="form-check-label form-check-inline" for="thruster">
-      <input class="form-check-input form-check-inline" type="radio" id="thruster" name="finSetup" value="Thruster" {{#ifCond post.setup "Thruster"}}checked{{/ifCond}}> Thruster
-    </label>
-    <label class="form-check-label form-check-inline" for="quadFin">
-      <input class="form-check-input form-check-inline" type="radio" id="quadFin" name="finSetup" value="Quad Fin" {{#ifCond post.setup "Quad Fin"}}checked{{/ifCond}}> Quad Fin
-    </label>
+    <input class="form-check-input" type="checkbox" id="fcs-2" name="finType" value="FCS 2" {{#ifCond post.type "FCS 2"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="fcs-2">FCS 2</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="futures" name="finType" value="Futures" {{#ifCond post.type "Futures"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="futures">Futures</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="other" name="finType" value="Other" {{#ifCond post.type "Other"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="other">Other</label>
   </div>
 </div>
 
 <div class="form-group">
-    <label for="listingFinType">Position</label>
-        <div class="form-check">
-            <label class="form-check-label form-check-inline" for="fullSet">
-                <input class="form-check-input form-check-inline" type="checkbox" id="fullSet" name="finPosition" value="Full Set" {{#ifCond post.position "Full Set"}}checked{{/ifCond}}> Full Set</label>
-            <label class="form-check-label form-check-inline" for="leftFront">
-                <input class="form-check-input form-check-inline" type="checkbox" id="leftFront" name="finPosition" value="Left Front" {{#ifCond post.position "Left Front"}}checked{{/ifCond}}> Left Front</label>
-            <label class="form-check-label form-check-inline" for="leftRear">
-                <input class="form-check-input form-check-inline" type="checkbox" id="leftRear" name="finPosition" value="Left Rear" {{#ifCond post.position "Left Rear"}}checked{{/ifCond}}> Left Rear</label>
-            <label class="form-check-label form-check-inline" for="center">
-                <input class="form-check-input form-check-inline" type="checkbox" id="center" name="finPosition" value="Center" {{#ifCond post.position "Center"}}checked{{/ifCond}}> Center</label>
-            <label class="form-check-label form-check-inline" for="rightFront">
-                <input class="form-check-input form-check-inline" type="checkbox" id="rightFront" name="finPosition" value="Right Front" {{#ifCond post.position "Right Front"}}checked{{/ifCond}}> Right Front</label>
-            <label class="form-check-label form-check-inline" for="rightRear">
-                <input class="form-check-input form-check-inline" type="checkbox" id="rightRear" name="finPosition" value="Right Rear" {{#ifCond post.position "Right Rear"}}checked{{/ifCond}}> Right Rear</label>
-        </div>
+  <label for="listingFinSize">Fin Size</label>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="finExtraSmall" name="finSize" value="Extra Small" {{#ifCond post.size "Extra Small"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="finExtraSmall">Extra Small</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="finSmall" name="finSize" value="Small" {{#ifCond post.size "Small"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="finSmall">Small</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="finMedium" name="finSize" value="Medium" {{#ifCond post.size "Medium"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="finMedium">Medium</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="finLarge" name="finSize" value="Large" {{#ifCond post.size "Large"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="finLarge">Large</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="finExtraLarge" name="finSize" value="Extra Large" {{#ifCond post.size "Extra Large"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="finExtraLarge">Extra Large</label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="listingFinSetup">Setup</label>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="singleFin" name="finSetup" value="Single Fin" {{#ifCond post.setup "Single Fin"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="singleFin">Single Fin</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="twinFin" name="finSetup" value="Twin Fin" {{#ifCond post.setup "Twin Fin"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="twinFin">Twin Fin</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="twoPlusOne" name="finSetup" value="Two Plus One" {{#ifCond post.setup "Two Plus One"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="twoPlusOne">2 + 1</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="thruster" name="finSetup" value="Thruster" {{#ifCond post.setup "Thruster"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="thruster">Thruster</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="quadFin" name="finSetup" value="Quad Fin" {{#ifCond post.setup "Quad Fin"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="quadFin">Quad Fin</label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="listingFinPosition">Position</label>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="fullSet" name="finPosition" value="Full Set" {{#ifCond post.position "Full Set"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="fullSet">Full Set</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="leftFront" name="finPosition" value="Left Front" {{#ifCond post.position "Left Front"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="leftFront">Left Front</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="leftRear" name="finPosition" value="Left Rear" {{#ifCond post.position "Left Rear"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="leftRear">Left Rear</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="center" name="finPosition" value="Center" {{#ifCond post.position "Center"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="center">Center</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="rightFront" name="finPosition" value="Right Front" {{#ifCond post.position "Right Front"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="rightFront">Right Front</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="rightRear" name="finPosition" value="Right Rear" {{#ifCond post.position "Right Rear"}}checked{{/ifCond}}>
+    <label class="form-check-label" for="rightRear">Right Rear</label>
+  </div>
 </div>

@@ -31,7 +31,7 @@
 
     <!-- Hero -->
     <div class="header-container">
-    <header class="p-4 rounded-3 bg-light d-flex justify-content-center flex-column">
+    <header class="p-4 bg-light d-flex justify-content-center flex-column">
       <div class="container-fluid d-flex flex-column">
         <h1 class="display-1 fw-bold">Sparefins</h1>
         <p class="col-md-8 lead">
@@ -85,6 +85,91 @@
     navbar.after(mobileTitle);
     navbar.style.display = 'none';
   }
+
+function handleRegisterForm(event) {
+  event.preventDefault(); // Prevent form submission
+
+  var form = this;
+  var formData = new FormData(form);
+  // Send AJAX request
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/register');
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.onload = function() {
+      console.log(`xhr onload function + ${xhr.responseText}`);
+      if (xhr.status === 200 || xhr.status === 400) {
+        var response;
+        try {
+          response = JSON.parse(xhr.responseText);
+        } catch (error) {
+          console.error('Failed to parse JSON response:', error);
+          return;
+        }
+
+        if (response.success) {
+          console.log(`success ${response}`);
+          $('#modalRegisterForm').modal('hide');
+          setTimeout(function() {
+            console.log('Success')
+    location.reload();
+  }, 500);
+      } else {
+        document.getElementById('registerErrors').innerHTML = '';
+
+        if (response.errors && response.errors.length > 0) {
+          // Display specific errors
+          var errorMessages = response.errors.map(function(error) {
+            return '<li>' + error.msg + '</li>';
+          }).join('');
+          document.getElementById('registerErrors').innerHTML = '<ul>' + errorMessages + '</ul>';
+        } else {
+          // Display general error message
+          document.getElementById('registerErrors').innerHTML = '<ul><li>' + response.message + '</li></ul>';
+        }
+
+        document.getElementById('registerErrors').style.display = 'block';
+      }
+    } else {
+      console.error('Request failed. Status:', xhr.status);
+    }
+  };
+  xhr.send(formData);
+}
+
+function handleLoginForm(event) {
+  event.preventDefault(); // Prevent form submission
+
+  var form = this;
+  var formData = new FormData(form);
+
+  // Send AJAX request
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/login');
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  xhr.onload = function() {
+    console.log(xhr.responseText);
+    if (xhr.status === 200) {
+      // Login successful, hide the modal and perform a full page refresh
+      $('#modalLoginForm').modal('hide');
+      setTimeout(function() {
+  location.reload();
+}, 500);
+    } else if (xhr.status === 401) {
+      // Display error message for invalid email or password
+      document.getElementById('loginErrors').innerHTML = 'Invalid email or password';
+      document.getElementById('loginErrors').style.display = 'block';
+    } else if (xhr.status === 400) {
+      document.getElementById('loginErrors').innerHTML = 'Please fill in both fields';
+      document.getElementById('loginErrors').style.display = 'block';
+      } else {
+      console.error('Request failed. Status:', xhr.status);
+    }
+  };
+  xhr.send(formData);
+}
+
+document.getElementById('registerForm').addEventListener('submit', handleRegisterForm);
+document.getElementById('loginForm').addEventListener('submit', handleLoginForm);
 </script>
   </body>
 

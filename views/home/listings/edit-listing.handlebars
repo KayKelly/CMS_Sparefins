@@ -5,16 +5,17 @@
         <label for="title">Title</label>
         <input name="title" type="text" class="form-control" id="title" value="{{post.title}}">
     </div>
+    <div class="form-group">
+        <label for="body">Description</label>
+        <textarea name="body" cols="30" rows="10" class="form-control" id="body">{{post.description}}</textarea>
+    </div>
         <img src="https://sparefins.s3.amazonaws.com/{{post.file}}" onerror="this.src='/images/sparefinsLogo.png';" class="img-thumbnail" width="100px" height="auto" alt="post image">
     <div class="form-group">
         <input type="hidden" name="existingFile" value="{{post.file}}">
-        <label for="file">File Upload</label>
+        <label for="file">Photo</label>
         <input type="file" name="file" class="form-control">
     </div>
     {{> home/fin-options}}
-    <div class="form-group">
-        <textarea name="body" cols="30" rows="10" class="form-control" id="body">{{post.description}}</textarea>
-    </div>
     <div class="form-group">
     <button type="submit" class="btn btn-primary">Update Post</button>
     </div>

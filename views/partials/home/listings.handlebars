@@ -14,12 +14,9 @@
           </div>
           <div class="card-footer" style="display:flex; justify-content:space-around; overflow:hidden;">
             <small><a href="post/{{slug}}" class="btn btn-dark"><i class="fa fa-eye"></i></a></small>
-            {{#ifCond user._id ../userId }}
-            <small><a href="/listings/edit/{{../_id}}" class="btn btn-info"><i class="fa fa-edit"></i></a></small>
-            {{/ifCond}}
             <small><button class="btn btn-success" id="messageButton" data-bs-toggle="modal" data-bs-target="#sendMessage-{{_id}}"><i class="fa fa-comment"></i></button></small>            <!-- Modal -->
             <div class="modal fade" id="sendMessage-{{_id}}" tabindex="-1" aria-labelledby="sendMessage" aria-hidden="true">
-              <div class="modal-dialog">
+              <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <form id="messageForm" action="/messages/send-message/{{user._id}}/{{slug}}" method="POST">
                     <div class="modal-header">

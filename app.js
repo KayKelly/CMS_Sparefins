@@ -71,6 +71,7 @@ const admin = require('./routes/admin/index');
 const posts = require('./routes/admin/posts');
 const categories = require('./routes/admin/categories');
 const comments = require('./routes/admin/comments');
+const users = require('./routes/admin/users');
 const fins = require('./routes/home/fins');
 const messages = require('./routes/home/messages');
 
@@ -80,6 +81,7 @@ app.use('/admin', admin);
 app.use('/admin/posts', posts);
 app.use('/admin/categories', categories);
 app.use('/admin/comments', comments);
+app.use('/admin/users', users);
 app.use('/listings', fins);
 app.use('/messages', messages);
 

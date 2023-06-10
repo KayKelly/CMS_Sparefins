@@ -3,6 +3,7 @@ const router = express.Router();
 const Post = require('../../models/Post');
 const AWS = require('aws-sdk');
 const sharp = require('sharp');
+const { body, validationResult } = require('express-validator');
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -11,52 +12,52 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-router.post('/add-listing', (req, res)=>{
-    let errors = [];
-
-    if(!req.body.listingTitle){
-        errors.push({message: 'please add a title'});
-    }
-    if(errors.length > 0){
-        res.render('home/listings/add-listing', {
-            errors: errors
-        })
-    } else {
+router.post(
+    '/add-listing',
+    [
+        body('listingTitle').trim().notEmpty().withMessage('Please add a title'),
+        body('description').trim().notEmpty().withMessage('Please add a description')
+    ],
+    (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const errorMessages = errors.array().map(error => error.msg);
+            res.render('home/listings/add-listing', { error_message: errorMessages });
+        } else {
         let filename = '';
 
-    if (req.files && req.files.file && req.files.file.size > 0) {
-        let file = req.files.file;
-        filename = `${Date.now()}-${file.name}`;
+        if (req.files && req.files.file && req.files.file.size > 0) {
+            let file = req.files.file;
+            filename = `${Date.now()}-${file.name}`;
 
-        console.log('File received:', filename);
+            console.log('File received:', filename);
 
-        sharp(file.data)
-            .toBuffer()
-            .then(data =>{
-                
-                const params = {
-                    Bucket: process.env.S3_BUCKET,
-                    Key: filename,
-                    Body: data,
-                    ContentType: file.mimetype,
-                };
-                
-                console.log('S3 upload params:', params);
-                console.log(process.env.TEST);
-                
-                s3.upload(params, (err, data)=> {
-                    if (err) {
-                        console.log(`Could not upload file because ${err}`);
-                        return;
-                    }
-                    console.log(`File uploaded successfully. Location: ${data.Location}`);
+            sharp(file.data)
+                .toBuffer()
+                .then(data =>{
+                    const params = {
+                        Bucket: process.env.S3_BUCKET,
+                        Key: filename,
+                        Body: data,
+                        ContentType: file.mimetype,
+                    };
+                    
+                    console.log('S3 upload params:', params);
+                    console.log(process.env.TEST);
+                    
+                    s3.upload(params, (err, data)=> {
+                        if (err) {
+                            console.log(`Could not upload file because ${err}`);
+                            return;
+                        }
+                        console.log(`File uploaded successfully. Location: ${data.Location}`);
+                    });
+                })
+                .catch(error =>{
+                    console.log('Error compressing the image:', error);
                 });
-            })
-            .catch(error =>{
-                console.log('Error compressing the image:', error);
-            });
             
-            } else {
+        } else {
                 console.log('No file received');
             };
 
