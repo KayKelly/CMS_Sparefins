@@ -48,7 +48,16 @@
 
     <!-- Page Content -->
     <div class="container-fluid">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881855606337228"
+
+      {{#if errors}}
+        {{#each errors}}
+          <div class="alert alert-danger">
+            {{message}}
+          </div>
+          {{/each}}
+      {{/if}}
+        {{> home/form-msgs}}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881855606337228"
      crossorigin="anonymous"></script>
 <!-- test -->
 <ins class="adsbygoogle"
@@ -60,15 +69,6 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
-      {{#if errors}}
-        {{#each errors}}
-          <div class="alert alert-danger">
-            {{message}}
-          </div>
-          {{/each}}
-      {{/if}}
-        {{> home/form-msgs}}
         {{{body}}}
     <!-- /.container -->
 
