@@ -37,7 +37,8 @@ router.get('/', (req, res)=>{
                     categories: categories,
                     current: parseInt(page),
                     pages: Math.ceil(postCount / perPage),
-                    userId: req.user ? req.user.id : null
+                    userId: req.user ? req.user.id : null,
+                    user: req.user || null,
                 });
                     });
         });
