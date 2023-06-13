@@ -43,7 +43,12 @@
       </div>
     </header>
     </div>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881855606337228"
+
+    {{> home/home-nav}}
+
+    <!-- Page Content -->
+    <div class="container-fluid">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881855606337228"
      crossorigin="anonymous"></script>
 <!-- test -->
 <ins class="adsbygoogle"
@@ -55,11 +60,6 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
-    {{> home/home-nav}}
-
-    <!-- Page Content -->
-    <div class="container-fluid">
 
       {{#if errors}}
         {{#each errors}}
