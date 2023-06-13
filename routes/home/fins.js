@@ -4,6 +4,7 @@ const Post = require('../../models/Post');
 const AWS = require('aws-sdk');
 const sharp = require('sharp');
 const { body, validationResult } = require('express-validator');
+const sanitizeHtml = require('sanitize-html');
 
 AWS.config.update({
   accessKeyId: process.env.AMAZ_ACCESS_KEY_ID,
@@ -16,7 +17,8 @@ router.post(
     '/add-listing',
     [
         body('listingTitle').trim().notEmpty().withMessage('Please add a title'),
-        body('description').trim().notEmpty().withMessage('Please add a description')
+        body('description').trim().notEmpty().withMessage('Please add a description'),
+        body('price').trim().notEmpty().withMessage('Please add a price')
     ],
     (req, res) => {
         const errors = validationResult(req);
@@ -63,8 +65,9 @@ router.post(
 
         const newPost = new Post({
             user: req.user.id,
-            title: req.body.listingTitle,
-            description: req.body.description,
+            title: sanitizeHtml(req.body.listingTitle),
+            description: sanitizeHtml(req.body.description),
+            price: sanitizeHtml(req.body.price),
             file: filename,
             type: req.body.finType,
             size: req.body.finSize,
@@ -131,8 +134,9 @@ router.put('/edit/:id', (req, res)=>{
     
     Post.findOne({_id: req.params.id}).then(post=>{
         post.user = req.user.id;
-        post.title = req.body.title;
-        post.body = req.body.description;
+        post.title = sanitizeHtml(req.body.title);
+        post.body = sanitizeHtml(req.body.description);
+        post.price = sanitizeHtml(req.body.price);
         post.file = filename;
         post.type = req.body.finType;
         post.size = req.body.finSize;

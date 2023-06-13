@@ -29,6 +29,9 @@ const PostSchema = new Schema({
     position: {
         type: Array,
     },
+    price: {
+        type: String,
+    },
     file: {
         type: String,
     },
